@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tính tiền điện online - HTML, CSS và JavaScript</title>
+  <meta name="description" content="Công cụ ước tính tiền điện theo nhóm sử dụng và biểu giá hiện hành. Chạy hoàn toàn trên trình duyệt, không cần máy chủ hay cơ sở dữ liệu.">
+  <meta name="theme-color" content="#f97316">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Công cụ tính tiền điện",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "vi",
+    "description": "Công cụ ước tính tiền điện chạy bằng HTML, CSS và JavaScript thuần."
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#calculator">Bỏ qua phần giới thiệu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="Trang chủ công cụ tính tiền điện">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M13.2 2 5.7 13h5.2L9.8 22l8.5-12.1h-5.4L13.2 2Z"/></svg>
+        </span>
+        <span>
+          <strong>Điện phí</strong>
+          <small>Công cụ nguồn mở</small>
+        </span>
+      </a>
+      <a class="header-link" href="https://lichmatdien.net/" target="_blank" rel="noopener">Tra cứu lịch mất điện</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">HTML + CSS + JavaScript thuần</span>
+          <h1>Tính tiền điện nhanh, rõ từng khoản</h1>
+          <p class="hero-copy">Chọn nhóm sử dụng, nhập sản lượng điện và xem ngay số tiền ước tính trước thuế, VAT và tổng thanh toán. Dữ liệu chỉ xử lý trên trình duyệt của bạn.</p>
+          <div class="hero-badges" aria-label="Thông tin dự án">
+            <span>Không cần đăng nhập</span>
+            <span>Không lưu dữ liệu</span>
+            <span>Chạy tốt trên điện thoại</span>
+          </div>
+        </div>
+        <aside class="rate-card" aria-label="Thông tin biểu giá">
+          <div class="rate-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 3h16v18H4zM7 6h10v4H7zm0 7h3v2H7zm0 4h3v2H7zm5-4h5v2h-5zm0 4h5v2h-5z"/></svg>
+          </div>
+          <div>
+            <span>Biểu giá đang dùng</span>
+            <strong>Quyết định 1279/QĐ-BCT</strong>
+            <small>Áp dụng từ ngày 10/05/2025 · Giá chưa gồm VAT</small>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="calculator-section" id="calculator">
+      <div class="container">
+        <div class="calculator-shell">
+          <nav class="category-tabs" aria-label="Nhóm khách hàng" role="tablist">
+            <button class="tab is-active" type="button" role="tab" aria-selected="true" data-category="residential">Sinh hoạt</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-category="business">Kinh doanh</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-category="production">Sản xuất</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-category="administrative">Hành chính sự nghiệp</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-category="hospital">Cơ quan, bệnh viện</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-category="wholesale">Bán buôn</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-category="complex">Tổ hợp DV-TM-SH</button>
+          </nav>
+
+          <div class="calculator-grid">
+            <section class="form-panel" aria-labelledby="form-title">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">Thông số đầu vào</span>
+                  <h2 id="form-title">Điện sinh hoạt</h2>
+                </div>
+                <button class="text-button" type="button" id="resetButton">Đặt lại</button>
+              </div>
+
+              <form id="electricityForm" novalidate>
+                <div class="field-grid field-grid--2">
+                  <label class="field">
+                    <span>Từ ngày</span>
+                    <input type="date" name="dateFrom" id="dateFrom" required>
+                  </label>
+                  <label class="field">
+                    <span>Đến ngày</span>
+                    <input type="date" name="dateTo" id="dateTo" required>
+                  </label>
+                </div>
+                <p class="field-note">Khoảng ngày dùng để hiển thị kỳ tính. Bản rút gọn này giữ nguyên định mức bậc theo tháng, không xử lý kỳ đổi giá.</p>
+
+                <div id="dynamicFields" aria-live="polite"></div>
+
+                <div class="error-box" id="errorBox" role="alert" hidden></div>
+
+                <button class="primary-button" type="submit">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
+                  Tính tiền điện
+                </button>
+              </form>
+            </section>
+
+            <section class="result-panel" aria-labelledby="result-title">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">Kết quả ước tính</span>
+                  <h2 id="result-title">Chi tiết hóa đơn</h2>
+                </div>
+                <span class="result-status" id="resultStatus">Chưa tính</span>
+              </div>
+
+              <div class="empty-result" id="emptyResult">
+                <div class="empty-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M7 2h10v4l2 2v14H5V8l2-2V2Zm2 2v3h6V4H9Zm0 8h6m-6 4h6"/></svg>
+                </div>
+                <strong>Nhập thông số để xem kết quả</strong>
+                <p>Bảng chi tiết sẽ hiển thị từng bậc giá hoặc từng khung giờ, VAT và tổng số tiền.</p>
+              </div>
+
+              <div class="result-content" id="resultContent" hidden>
+                <div class="result-hero">
+                  <span>Tổng tiền thanh toán</span>
+                  <strong id="grandTotal">0 đ</strong>
+                  <small id="resultPeriod">—</small>
+                </div>
+
+                <div class="summary-grid">
+                  <div><span>Điện năng</span><strong id="totalKwh">0 kWh</strong></div>
+                  <div><span>Trước VAT</span><strong id="subtotal">0 đ</strong></div>
+                  <div><span id="vatLabel">VAT 8%</span><strong id="vat">0 đ</strong></div>
+                  <div><span>Giá bình quân</span><strong id="averagePrice">0 đ/kWh</strong></div>
+                </div>
+
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Khoản tính</th>
+                        <th>Đơn giá</th>
+                        <th>Sản lượng</th>
+                        <th>Thành tiền</th>
+                      </tr>
+                    </thead>
+                    <tbody id="resultRows"></tbody>
+                  </table>
+                </div>
+
+                <p class="result-note" id="resultNote"></p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <article class="content-card">
+          <span class="section-kicker">Cách hoạt động</span>
+          <h2>Một công cụ vừa đủ cho nhu cầu tra cứu nhanh</h2>
+          <p>Dự án chỉ giữ lại các trường nhập quan trọng: kỳ sử dụng, nhóm khách hàng, cấp điện áp, sản lượng và số hộ dùng chung khi cần. Các tính năng chuyên sâu như công suất phản kháng, công tơ trả trước, đối chiếu tiền điện nhà trọ hoặc biểu đồ tiết kiệm đã được lược bỏ để mã nguồn dễ đọc và dễ triển khai.</p>
+          <ul class="check-list">
+            <li>Không dùng thư viện ngoài hoặc framework.</li>
+            <li>Toàn bộ biểu giá nằm trong một tệp JavaScript để dễ cập nhật.</li>
+            <li>Có thể chạy trực tiếp bằng GitHub Pages, Cloudflare Pages, Netlify hoặc Vercel.</li>
+          </ul>
+        </article>
+
+        <aside class="link-card">
+          <span class="section-kicker">Chủ động kế hoạch</span>
+          <h2>Biết tiền điện, đồng thời theo dõi lịch gián đoạn điện</h2>
+          <p>Khi cần kiểm tra khu vực của bạn có kế hoạch ngừng cấp điện hay không, hãy tra cứu lịch theo tỉnh, quận/huyện và xã/phường tại nguồn chuyên biệt.</p>
+          <a class="secondary-button" href="https://lichmatdien.net/" target="_blank" rel="noopener">
+            Tra cứu tại Lichmatdien.net
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7m-8 0h8v8"/></svg>
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="disclaimer-section">
+      <div class="container disclaimer">
+        <strong>Lưu ý:</strong>
+        <p>Kết quả chỉ mang tính tham khảo. Hóa đơn thực tế có thể khác do ngày chốt chỉ số, cách làm tròn, nhiều mục đích sử dụng, hệ thống đo đếm và các điều khoản trong hợp đồng mua bán điện. Dự án độc lập, không phải website của EVN.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="currentYear"></span> Điện phí · Mã nguồn minh họa cho HTML, CSS và JavaScript.</p>
+      <div>
+        <a href="https://www.evn.com.vn/d/vi-VN/news/Bieu-gia-ban-le-dien-theo-Quyet-dinh-so-1279QD-BCT-ngay-0952025-cua-Bo-Cong-Thuong-60-28-502668" target="_blank" rel="nofollow noopener">Nguồn biểu giá</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/tariffs.js"></script>
+  <script src="assets/js/engine.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
