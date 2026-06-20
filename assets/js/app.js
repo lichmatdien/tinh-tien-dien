@@ -90,8 +90,7 @@
             <span>Số hộ dùng chung công tơ</span>
             <input type="number" name="households" min="1" step="1" value="1" inputmode="numeric">
           </label>
-        </div>
-        <p class="field-note">Mỗi hộ được nhân thêm một định mức bậc thang. Trường hợp một hộ dùng điện, giữ giá trị là 1.</p>`;
+        </div>`;
     }
 
     if (category === 'business' || category === 'production') {
@@ -100,8 +99,7 @@
           <span>Cấp điện áp</span>
           <select name="voltage">${buildVoltageOptions(TARIFFS[category].voltages)}</select>
         </label>
-        ${rateModeTemplate()}
-        <p class="field-note">Khi chọn “Một mức giá”, công cụ dùng đơn giá giờ bình thường của cấp điện áp đã chọn.</p>`;
+        ${rateModeTemplate()}`;
     }
 
     if (category === 'administrative' || category === 'hospital') {
@@ -130,8 +128,7 @@
           <label class="field"><span>Điện sinh hoạt (kWh)</span><input type="number" name="residentialKwh" min="0" step="0.01" value="0" inputmode="decimal"></label>
           <label class="field"><span>Số hộ có phát sinh</span><input type="number" name="households" min="1" step="1" value="1" inputmode="numeric"></label>
           <label class="field"><span>Điện mục đích khác (kWh)</span><input type="number" name="otherKwh" min="0" step="0.01" value="0" inputmode="decimal"></label>
-        </div>
-        <p class="field-note">Bản rút gọn chưa xử lý hệ số tổn thất hoặc sản lượng qua nhiều công tơ thành phần.</p>`;
+        </div>`;
     }
 
     if (category === 'complex') {
@@ -189,7 +186,6 @@
     document.getElementById('vatLabel').textContent = result.vatLabel;
     document.getElementById('averagePrice').textContent = `${formatNumber(result.averagePrice, 0)} đ/kWh`;
     document.getElementById('resultPeriod').textContent = `Kỳ ${result.dateRange.from.toLocaleDateString('vi-VN')} - ${result.dateRange.to.toLocaleDateString('vi-VN')}`;
-    document.getElementById('resultNote').textContent = `${result.note} Kết quả dùng ${result.vatLabel} và làm tròn đến đồng.`;
 
     document.getElementById('resultRows').innerHTML = result.rows.map(row => `
       <tr>

@@ -1,75 +1,31 @@
-# Công cụ tính tiền điện bằng HTML, CSS và JavaScript
+# Công cụ tính tiền điện
 
-Dự án tĩnh, không cần PHP, cơ sở dữ liệu, API hoặc bước build. Chỉ cần mở `index.html` là chạy được.
+Công cụ hỗ trợ ước tính tiền điện theo nhóm sử dụng, sản lượng tiêu thụ và biểu giá hiện hành.
 
-## Phạm vi đã giữ lại
+**Phiên bản đầy đủ:** [Tính tiền điện tại Lichmatdien.net](https://lichmatdien.net/tinh-tien-dien.html)
 
-- Điện sinh hoạt theo 6 bậc và số hộ dùng chung công tơ.
-- Điện kinh doanh, sản xuất theo cấp điện áp và 1/3 khung giờ.
-- Hành chính sự nghiệp; bệnh viện, trường học.
-- Bán buôn điện sinh hoạt và tổ hợp thương mại - dịch vụ - sinh hoạt ở mức rút gọn.
-- VAT 8% hiện hành đến hết 31/12/2026, bảng chi tiết, tổng tiền và giá bình quân.
+## Chức năng chính
 
-## Những phần đã lược bỏ so với bộ mã PHP ban đầu
+- Tính điện sinh hoạt theo 6 bậc và số hộ dùng chung công tơ.
+- Tính điện kinh doanh, sản xuất theo cấp điện áp và khung giờ.
+- Hỗ trợ nhóm hành chính sự nghiệp, cơ quan, bệnh viện và bán buôn.
+- Hiển thị tiền trước VAT, VAT, tổng thanh toán và giá điện bình quân.
+- Giao diện phù hợp với máy tính và điện thoại.
 
-- Phụ thuộc CMS, `FSRoute`, tệp `views/*.php` và các lệnh `include`.
-- Công suất phản kháng, chỉ số công tơ, công tơ thẻ trả trước.
-- Đối chiếu tiền điện phòng trọ, biểu đồ bậc điện, gợi ý tiết kiệm.
-- Nội dung SEO dài lặp lại trong từng màn hình.
+## Đưa lên GitHub Pages
 
-GitHub Pages chỉ phục vụ tệp tĩnh nên việc chuyển toàn bộ sang HTML/CSS/JS giúp dự án triển khai trực tiếp từ repository.
-
-## Cấu trúc
-
-```text
-.
-├── index.html
-├── 404.html
-├── assets/
-│   ├── css/style.css
-│   ├── img/favicon.svg
-│   └── js/
-│       ├── tariffs.js
-│       ├── engine.js
-│       └── app.js
-├── manifest.webmanifest
-├── robots.txt
-└── .nojekyll
-```
-
-## Chạy trên máy tính
-
-Cách nhanh nhất: mở trực tiếp `index.html`.
-
-Hoặc chạy máy chủ tĩnh:
-
-```bash
-python -m http.server 8080
-```
-
-Sau đó mở `http://localhost:8080`.
-
-## Đăng lên GitHub Pages
-
-1. Tạo repository mới, ví dụ `tinh-tien-dien`.
-2. Tải toàn bộ file trong thư mục này lên nhánh `main`.
+1. Tạo một repository mới trên GitHub.
+2. Tải toàn bộ tệp trong thư mục này lên nhánh `main`.
 3. Vào **Settings → Pages**.
-4. Ở **Build and deployment**, chọn **Deploy from a branch**.
-5. Chọn nhánh `main`, thư mục `/ (root)`, rồi bấm **Save**.
-6. Chờ GitHub cấp địa chỉ dạng `https://ten-tai-khoan.github.io/tinh-tien-dien/`.
+4. Chọn **Deploy from a branch**.
+5. Chọn nhánh `main` và thư mục `/ (root)`, sau đó nhấn **Save**.
 
-Chi tiết thêm nằm trong [docs/DEPLOY.md](docs/DEPLOY.md).
+Hướng dẫn chi tiết nằm trong [docs/DEPLOY.md](docs/DEPLOY.md).
 
-## Cập nhật biểu giá
+## Biểu giá
 
-Mở `assets/js/tariffs.js` và sửa các con số trong đối tượng `ELECTRICITY_TARIFFS`. Không cần sửa giao diện hoặc thuật toán.
+Biểu giá đang sử dụng được khai báo trong `assets/js/tariffs.js`. Khi có biểu giá mới, cần cập nhật lại các mức giá trước khi sử dụng.
 
-Biểu giá mẫu hiện tại lấy theo Quyết định 1279/QĐ-BCT ngày 09/05/2025, áp dụng từ 10/05/2025. Giá trong cấu hình chưa gồm VAT. Thuế suất mẫu đang đặt là 8% theo chính sách giảm thuế có hiệu lực đến hết 31/12/2026.
+## Thông tin
 
-## Liên kết hữu ích
-
-Công cụ tập trung vào ước tính hóa đơn. Khi cần theo dõi kế hoạch ngừng cấp điện theo khu vực, có thể tra cứu tại [Lichmatdien.net](https://lichmatdien.net/).
-
-## Lưu ý
-
-Dự án độc lập và không phải website của EVN. Kết quả chỉ mang tính tham khảo; hóa đơn chính thức do đơn vị bán điện phát hành.
+Công cụ được phát triển bởi [Lichmatdien.net](https://lichmatdien.net/tinh-tien-dien.html). Kết quả hiển thị mang tính ước tính; hóa đơn chính thức do đơn vị bán điện phát hành.

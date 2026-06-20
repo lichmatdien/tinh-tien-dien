@@ -44,7 +44,7 @@ Cách này phù hợp để xem thử; muốn cập nhật tự động thì nê
 
 ## Gợi ý SEO tự nhiên
 
-- Giữ một liên kết ngữ cảnh trong phần nội dung sang `https://lichmatdien.net/`.
+- Giữ một liên kết ngữ cảnh trong phần nội dung sang `https://lichmatdien.net/tinh-tien-dien.html`.
 - Dùng anchor thương hiệu hoặc mô tả đúng nhu cầu, không lặp từ khóa chính xác nhiều lần.
 - Không tạo hàng loạt bản sao y hệt trên nhiều tên miền rồi index tất cả. Nên chọn GitHub Pages làm bản chính; các nền tảng khác chỉ dùng để demo hoặc thử nghiệm.
 - Khi đã có URL chính thức, có thể thêm thẻ canonical vào `index.html` để tránh trùng lặp nếu vẫn duy trì nhiều bản công khai.

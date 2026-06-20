@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tính tiền điện online - HTML, CSS và JavaScript</title>
-  <meta name="description" content="Công cụ ước tính tiền điện theo nhóm sử dụng và biểu giá hiện hành. Chạy hoàn toàn trên trình duyệt, không cần máy chủ hay cơ sở dữ liệu.">
+  <title>Tính tiền điện online - Ước tính hóa đơn nhanh</title>
+  <meta name="description" content="Công cụ tính tiền điện online giúp ước tính chi phí theo nhóm sử dụng, sản lượng điện và biểu giá hiện hành.">
+  <meta name="author" content="Lichmatdien.net">
   <meta name="theme-color" content="#f97316">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -18,7 +19,12 @@
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "inLanguage": "vi",
-    "description": "Công cụ ước tính tiền điện chạy bằng HTML, CSS và JavaScript thuần."
+    "description": "Công cụ tính tiền điện online giúp ước tính chi phí theo nhóm sử dụng và biểu giá hiện hành.",
+    "creator": {
+      "@type": "Organization",
+      "name": "Lichmatdien.net",
+      "url": "https://lichmatdien.net/tinh-tien-dien.html"
+    }
   }
   </script>
 </head>
@@ -32,8 +38,8 @@
           <svg viewBox="0 0 24 24"><path d="M13.2 2 5.7 13h5.2L9.8 22l8.5-12.1h-5.4L13.2 2Z"/></svg>
         </span>
         <span>
-          <strong>Điện phí</strong>
-          <small>Công cụ nguồn mở</small>
+          <strong>Tính tiền điện</strong>
+          <small>Ước tính hóa đơn</small>
         </span>
       </a>
       <a class="header-link" href="https://lichmatdien.net/" target="_blank" rel="noopener">Tra cứu lịch mất điện</a>
@@ -44,13 +50,13 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">HTML + CSS + JavaScript thuần</span>
+          <span class="eyebrow">Ước tính theo biểu giá điện hiện hành</span>
           <h1>Tính tiền điện nhanh, rõ từng khoản</h1>
-          <p class="hero-copy">Chọn nhóm sử dụng, nhập sản lượng điện và xem ngay số tiền ước tính trước thuế, VAT và tổng thanh toán. Dữ liệu chỉ xử lý trên trình duyệt của bạn.</p>
-          <div class="hero-badges" aria-label="Thông tin dự án">
+          <p class="hero-copy">Chọn nhóm sử dụng, nhập sản lượng điện và xem ngay số tiền dự kiến trước thuế, VAT và tổng thanh toán.</p>
+          <div class="hero-badges" aria-label="Điểm nổi bật">
             <span>Không cần đăng nhập</span>
-            <span>Không lưu dữ liệu</span>
-            <span>Chạy tốt trên điện thoại</span>
+            <span>Hiển thị rõ từng khoản</span>
+            <span>Dễ dùng trên điện thoại</span>
           </div>
         </div>
         <aside class="rate-card" aria-label="Thông tin biểu giá">
@@ -100,8 +106,6 @@
                     <input type="date" name="dateTo" id="dateTo" required>
                   </label>
                 </div>
-                <p class="field-note">Khoảng ngày dùng để hiển thị kỳ tính. Bản rút gọn này giữ nguyên định mức bậc theo tháng, không xử lý kỳ đổi giá.</p>
-
                 <div id="dynamicFields" aria-live="polite"></div>
 
                 <div class="error-box" id="errorBox" role="alert" hidden></div>
@@ -158,7 +162,6 @@
                   </table>
                 </div>
 
-                <p class="result-note" id="resultNote"></p>
               </div>
             </section>
           </div>
@@ -169,13 +172,13 @@
     <section class="content-section">
       <div class="container content-grid">
         <article class="content-card">
-          <span class="section-kicker">Cách hoạt động</span>
-          <h2>Một công cụ vừa đủ cho nhu cầu tra cứu nhanh</h2>
-          <p>Dự án chỉ giữ lại các trường nhập quan trọng: kỳ sử dụng, nhóm khách hàng, cấp điện áp, sản lượng và số hộ dùng chung khi cần. Các tính năng chuyên sâu như công suất phản kháng, công tơ trả trước, đối chiếu tiền điện nhà trọ hoặc biểu đồ tiết kiệm đã được lược bỏ để mã nguồn dễ đọc và dễ triển khai.</p>
+          <span class="section-kicker">Hướng dẫn sử dụng</span>
+          <h2>Ba bước để ước tính tiền điện</h2>
+          <p>Chọn đúng nhóm khách hàng, nhập kỳ sử dụng và sản lượng điện. Kết quả sẽ được tách rõ tiền điện trước thuế, VAT và tổng số tiền dự kiến.</p>
           <ul class="check-list">
-            <li>Không dùng thư viện ngoài hoặc framework.</li>
-            <li>Toàn bộ biểu giá nằm trong một tệp JavaScript để dễ cập nhật.</li>
-            <li>Có thể chạy trực tiếp bằng GitHub Pages, Cloudflare Pages, Netlify hoặc Vercel.</li>
+            <li>Điện sinh hoạt được tính theo từng bậc tiêu thụ.</li>
+            <li>Các nhóm khác được tính theo cấp điện áp và khung giờ phù hợp.</li>
+            <li>Bảng kết quả hiển thị đơn giá, sản lượng và thành tiền từng khoản.</li>
           </ul>
         </article>
 
@@ -191,17 +194,11 @@
       </div>
     </section>
 
-    <section class="disclaimer-section">
-      <div class="container disclaimer">
-        <strong>Lưu ý:</strong>
-        <p>Kết quả chỉ mang tính tham khảo. Hóa đơn thực tế có thể khác do ngày chốt chỉ số, cách làm tròn, nhiều mục đích sử dụng, hệ thống đo đếm và các điều khoản trong hợp đồng mua bán điện. Dự án độc lập, không phải website của EVN.</p>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="currentYear"></span> Điện phí · Mã nguồn minh họa cho HTML, CSS và JavaScript.</p>
+      <p>© <span id="currentYear"></span> Công cụ tính tiền điện · Phát triển bởi <a href="https://lichmatdien.net/tinh-tien-dien.html" target="_blank" rel="noopener">Lichmatdien.net</a>.</p>
       <div>
         <a href="https://www.evn.com.vn/d/vi-VN/news/Bieu-gia-ban-le-dien-theo-Quyet-dinh-so-1279QD-BCT-ngay-0952025-cua-Bo-Cong-Thuong-60-28-502668" target="_blank" rel="nofollow noopener">Nguồn biểu giá</a>
       </div>
